@@ -6,23 +6,55 @@ import Card from '../components/Card';
 import CardSection from '../components/CardSection';
 import Button from '../components/Button';
 import Input from './Input';
+import Spinner from './Spinner';
 export default class LoginForm extends Component{
     state={
         email:'',
         password:'',
-        error:''
+        error:'',
+        loading:false
     }
+
+
     onButtonPress(){
         const {email, password}= this.state;
-        this.setState({error:''});
+        this.setState({error:'', loading:true});
         firebase.auth().signInWithEmailAndPassword(email,password)
+        .then(this.onLoginSucess.bind(this))
         .catch(()=>{
             firebase.auth().createUserWithEmailAndPassword(email,password)
-            .catch(()=>{
-                this.setState({error:'Authentication Failed.'});
-            });
+            .then(this.onLoginSucess.bind(this))
+            .catch(this.onLoginFail.bind(this));
         });
     }
+
+    onLoginFail(){
+        this.setState({
+            error:'Authentication Failed.',
+            loading:false
+        })
+    }
+
+    onLoginSucess(){
+        this.setState({
+            email:'',
+            password:'',
+            loading:false,
+            error:''
+        })
+    }
+
+    renderButton(){
+        if(this.state.loading){
+            return <Spinner size='small'/>
+        }
+        return (
+            <Button
+                onPress={this.onButtonPress.bind(this)}
+                >Login</Button>
+        );
+    }
+
     render(){
         return(
             <Card>
@@ -34,7 +66,7 @@ export default class LoginForm extends Component{
             placeholder='Enter your email'
             />
             </CardSection>
-            <Text style={styles.textErrorStyle}>{this.state.error}</Text>
+            
             <CardSection>
             <TextInput
             secureTextEntry
@@ -44,11 +76,11 @@ export default class LoginForm extends Component{
             placeholder='Enter your password'
             />
             </CardSection>
+            
+            <Text style={styles.textErrorStyle}>{this.state.error}</Text>
 
             <CardSection>
-                <Button
-                onPress={this.onButtonPress.bind(this)}
-                >Login</Button>
+            {this.renderButton()}
             </CardSection>
             </Card>
         );
@@ -64,7 +96,7 @@ const styles = {
         borderRadius:20
     },
     textErrorStyle:{
-        fontColor:"red",
-        alignSeft:'center',
+        // fontColor:"red",
+        // alignSeft:'center',
     }
 }

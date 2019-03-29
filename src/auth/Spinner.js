@@ -1,9 +1,19 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-const Spinner = () => {
+import {View, ActivityIndicator} from 'react-native';
+const Spinner = ({size}) => {
     return(
-        <View></View>
+        <View style={styles.SpinnerStyles}>
+        <ActivityIndicator size={size || 'large'}/>
+        </View>
     );
-}
+};
 
-export {Spinner};
+const styles = {
+    SpinnerStyles:{
+        flex:1,
+        justifyContent:'center',
+        alignItems:'center'
+    }
+};
+
+export default Spinner;

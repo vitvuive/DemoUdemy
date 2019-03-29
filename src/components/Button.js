@@ -12,7 +12,7 @@ const Button = ({onPress,children}) => {
 
 const styles = {
     buttonStyle:{
-        padding:4,
+        padding:10,
         justifyContent:'center',
         alignItems:'center',
         alignSeft:'stretch',
@@ -21,10 +21,12 @@ const styles = {
         borderRadius:15,
         marginLeft:15,
         marginRight:15,
+        marginTop:15
     },
     textStyle:{
         fontSize:16,
         fontWeight:'600',
+        
     }
 }
 
