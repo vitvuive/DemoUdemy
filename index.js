@@ -4,8 +4,9 @@
  */
 
 import {AppRegistry} from 'react-native';
-import App from './src/components/App';
+// import App from './src/components/App';
 import indexauth from './src/auth/indexauth';
+import App from './src/tech_stack/App';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => indexauth);
+AppRegistry.registerComponent(appName, () => App);
