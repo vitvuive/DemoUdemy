@@ -17,8 +17,8 @@ const styles = {
         alignItems:'center',
         alignSeft:'stretch',
         flex:1,
-        backgroundColor:'#F2ED4E',
-        borderRadius:15,
+        backgroundColor:'#B2C4F2',
+        borderRadius:20,
         marginLeft:15,
         marginRight:15,
         marginTop:15
@@ -26,7 +26,6 @@ const styles = {
     textStyle:{
         fontSize:16,
         fontWeight:'600',
-        
     }
 }
 

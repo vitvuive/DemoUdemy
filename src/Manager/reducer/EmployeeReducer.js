@@ -10,4 +10,4 @@ export default (state=INITIAl_STATE, action) => {
         default:
             return state;
     }
-} 
+} ;

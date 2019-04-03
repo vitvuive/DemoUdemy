@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import firebase from '@firebase/app';
-import {View, Text} from 'react-native';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducer from './reducer';
-import LoginForm from './LoginForm';
 import Router from './Router';
 export default class App extends Component{
 
