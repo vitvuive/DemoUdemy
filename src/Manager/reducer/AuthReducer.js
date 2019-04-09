@@ -1,41 +1,48 @@
 import {
  EMAIL_CHANGED,
  PASSWORD_CHANGED,
- LOGIN_USER_SUCCESS,
+    LOGIN_USER_SUCCESS,
  LOGIN_USER_FAIL,
-  LOGIN_USER,
- CREATE_USER
+    LOGIN_USER,
+ CREATE_USER,
 } from '../action/type';
 
 const INITIAL_STATE = {
-  email: '',
- password: '',
+ email: '',
+    password: '',
  user: null,
- error: '',
- loading: false
+    error: '',
+ loading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
  switch (action.type) {
-    case EMAIL_CHANGED:
+  case EMAIL_CHANGED:
    return { ...state, email: action.payload };
 
-    case PASSWORD_CHANGED:
-   return { ...state, password: action.payload };
+        case PASSWORD_CHANGED:
+            return { ...state, password: action.payload };
 
-    case LOGIN_USER_SUCCESS:
-      return { ...state, user: action.payload, error: '', email: '', password: '', loading: false };
+        case LOGIN_USER_SUCCESS:
+            return {
+    ...state,
+    user: action.payload,
+    error: '',
+                email: '',
+    password: '',
+    loading: false,
+            };
 
-    case LOGIN_USER:
-   return { ...state, loading: true, error: '' };
+  case LOGIN_USER:
+            return { ...state, loading: true, error: '' };
 
-    case CREATE_USER:
-   return { ...state, loading: false, error: '' };
+  case CREATE_USER:
+            return { ...state, loading: false, error: '' };
 
-    case LOGIN_USER_FAIL:
-   return { ...state, error: 'Authentication fail!', loading: false };
+  case LOGIN_USER_FAIL:
+            return { ...state, error: 'Authentication fail!', loading: false };
 
-    default:
-   return state;
+  default:
+            return state;
  }
 };

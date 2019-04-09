@@ -3,6 +3,6 @@ import LibraryReducers from './LibraryReducer';
 import SectionReducer from './SectionReducer';
 
 export default combineReducers({
-  libraries: LibraryReducers,
- selectedLibraryId: SectionReducer
+    libraries: LibraryReducers,
+    selectedLibraryId: SectionReducer,
 });
