@@ -3,11 +3,11 @@ import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged, loginUser, loginUserFail } from './action';
+import { emailChanged, passwordChanged, createUser, loginUserFail } from './action';
 import Button from '../components/Button';
 import Spinner from '../auth/Spinner';
 import { Input } from '../auth/Input';
-class LoginForm extends Component {
+class RegisterForm extends Component {
  onEmailChange(text) {
   this.props.emailChanged(text);
  }
@@ -17,7 +17,7 @@ class LoginForm extends Component {
  onButtonPress() {
   const { email, password } = this.props;
 
-  this.props.loginUser({ email, password });
+  this.props.createUser({ email, password });
  }
  onError() {
   if (this.props.error) {
@@ -32,8 +32,9 @@ class LoginForm extends Component {
   if (this.props.loading) {
    return <Spinner />;
   }
-  return <Button onPress={this.onButtonPress.bind(this)}>LOG IN</Button>;
+  return <Button onPress={this.onButtonPress.bind(this)}>SIGN IN</Button>;
  }
+
  render() {
   const {
    contentForm,
@@ -50,7 +51,7 @@ class LoginForm extends Component {
     </View>
     <View style={containerForm}>
      <View style={contentForm}>
-      <Text style={textContentForm}>Login Account</Text>
+      <Text style={textContentForm}>Create an Account</Text>
      </View>
      <TextInput
       style={styles.textInputStyle}
@@ -65,6 +66,7 @@ class LoginForm extends Component {
       }}
       blurOnSubmit={false}
      />
+
      <TextInput
       style={styles.textInputStyle}
       label="Password:"
@@ -82,9 +84,9 @@ class LoginForm extends Component {
      {this.renderSpinner()}
     </View>
     <View style={containerRegister}>
-     <Text style={{ fontSize: 18, fontWeight: '400' }}>Don't have an account?</Text>
-     <TouchableOpacity onPress={() => Actions.register()}>
-      <Text style={{ color: '#8e83ff', fontSize: 18, fontWeight: '500' }}>REGISTER</Text>
+     <Text style={{ fontSize: 18, fontWeight: '400' }}>Do you have an account?</Text>
+     <TouchableOpacity onPress={() => Actions.auth()}>
+      <Text style={{ color: '#8e83ff', fontSize: 18, fontWeight: '500' }}>LOG IN</Text>
      </TouchableOpacity>
     </View>
    </LinearGradient>
@@ -100,18 +102,18 @@ const styles = {
   justifyContent: 'center'
  },
  containerForm: {
-  paddingLeft: 8,
-  paddingRight: 8,
+  paddingLeft: 10,
+  paddingRight: 10,
   backgroundColor: 'white',
-  marginLeft: 24,
-  marginRight: 24,
+  marginLeft: 25,
+  marginRight: 25,
   borderRadius: 15,
   shadowColor: '#000',
   shadowOffset: { width: 0, height: 0 },
   shadowOpacity: 0.1,
   shadowRadius: 2,
   elevation: 3,
-  paddingBottom: 8
+  paddingBottom: 10
  },
  containerRegister: {
   alignItems: 'center',
@@ -158,5 +160,10 @@ const mapStateToProps = state => {
 
 export default connect(
  mapStateToProps,
- { emailChanged, passwordChanged, loginUser, loginUserFail }
-)(LoginForm);
+ {
+  emailChanged,
+  passwordChanged,
+  createUser,
+  loginUserFail
+ }
+)(RegisterForm);
