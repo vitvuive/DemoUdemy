@@ -8,54 +8,53 @@ import {
     passwordChanged,
     loginUser,
     loginUserFail,
-} from './action';
-import Button from '../components/Button';
-import Spinner from '../auth/Spinner';
-import { Input } from '../auth/Input';
+} from '../action';
+import { Styled, StyledButton, StyledText, Button, Spinner } from '../commons';
+
 class LoginForm extends Component {
-    onEmailChange(text) {
+    _onEmailChange(text) {
         this.props.emailChanged(text);
     }
-    onPasswordChange(text) {
+
+    _onPasswordChange(text) {
         this.props.passwordChanged(text);
     }
-    onButtonPress() {
+
+    _onButtonPress = () => {
         const { email, password } = this.props;
 
         this.props.loginUser({ email, password });
+    };
+
+    _renderError() {
+        if (!this.props.error) return;
+
+        return (
+            <View style={{ backgroundColor: 'white', alignItems: 'center' }}>
+                <Text style={{ color: 'red', alignSelf: 'center' }}>
+                    {this.props.error}
+                </Text>
+            </View>
+        );
     }
-    onError() {
-        if (this.props.error) {
-            return (
-                <View
-                    style={{ backgroundColor: 'white', alignItems: 'center' }}
-                >
-                    <Text style={{ color: 'red', alignSelf: 'center' }}>
-                        {this.props.error}
-                    </Text>
-                </View>
-            );
-        }
-    }
-    renderSpinner() {
-        if (this.props.loading) {
-            return <Spinner />;
-        }
-        return <Button onPress={this.onButtonPress.bind(this)}>LOG IN</Button>;
+    _renderButton() {
+        if (this.props.loading) return <Spinner />;
+
+        return <Button onPress={this._onButtonPress}>{'LOG IN'}</Button>;
     }
     render() {
         const {
             contentForm,
-            containerStyle,
             containerForm,
             textContentForm,
             containerRegister,
             containerLogo,
+            bao,
         } = styles;
         return (
             <LinearGradient
                 colors={['#5056ff', '#5056ff', '#FFFFFF', '#FFFFFF']}
-                style={styles.bao}
+                style={bao}
             >
                 <View style={containerLogo}>
                     <Text
@@ -65,18 +64,18 @@ class LoginForm extends Component {
                             fontWeight: '500',
                         }}
                     >
-                        LOGO
+                        {'LOGO'}
                     </Text>
                 </View>
                 <View style={containerForm}>
                     <View style={contentForm}>
-                        <Text style={textContentForm}>Login Account</Text>
+                        <Text style={textContentForm}>{'Login Account'}</Text>
                     </View>
                     <TextInput
                         style={styles.textInputStyle}
                         label="Email:"
                         placeholder="Enter your email"
-                        onChangeText={this.onEmailChange.bind(this)}
+                        onChangeText={this._onEmailChange.bind(this)}
                         value={this.props.email}
                         keyboardType="email-address"
                         returnKeyType="next"
@@ -89,17 +88,17 @@ class LoginForm extends Component {
                         style={styles.textInputStyle}
                         label="Password:"
                         placeholder="Enter your password"
-                        onChangeText={this.onPasswordChange.bind(this)}
+                        onChangeText={this._onPasswordChange.bind(this)}
                         value={this.props.password}
                         secureTextEntry
                         ref={input => {
                             this.secondTextInput = input;
                         }}
                         returnKeyType="go"
-                        onSubmitEditing={this.onButtonPress.bind(this)}
+                        onSubmitEditing={this._onButtonPress}
                     />
-                    <View>{this.onError()}</View>
-                    {this.renderSpinner()}
+                    <View>{this._renderError()}</View>
+                    {this._renderButton()}
                 </View>
                 <View style={containerRegister}>
                     <Text style={{ fontSize: 18, fontWeight: '400' }}>
@@ -113,7 +112,7 @@ class LoginForm extends Component {
                                 fontWeight: '500',
                             }}
                         >
-                            REGISTER
+                            {'REGISTER'}
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -125,7 +124,6 @@ class LoginForm extends Component {
 const styles = {
     containerStyle: {
         flex: 1,
-        // backgroundColor:'#aaccff',
         backgroundColor: '#FCFCFC',
         justifyContent: 'center',
     },

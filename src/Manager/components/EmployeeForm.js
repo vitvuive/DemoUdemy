@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, Picker, TextInput } from 'react-native';
 import { connect } from 'react-redux';
-import { employeeUpdate } from './action';
-import { Input } from '../auth/Input';
+import { employeeUpdate } from '../action';
+import { Input } from '../commons';
 class EmployeeForm extends React.Component {
     buttonPress() {
         const { name, phone, shift } = this.props;
@@ -84,7 +84,6 @@ const styles = {
 
 const mapStateToProps = state => {
     const { name, phone, shift } = state.employeeForm;
-
     return { name, phone, shift };
 };
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, View, Modal } from 'react-native';
-import CardSection from '../components/CardSection';
-import Button from '../components/Button';
+import { Button } from '../commons';
 
 const Confirm = ({ children, visible, onAccept, onDecline }) => {
     const {

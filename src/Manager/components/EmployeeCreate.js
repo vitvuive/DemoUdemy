@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, Picker, TextInput } from 'react-native';
+import { View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
-import { employeeUpdate, employeeCreate } from './action';
-import Button from '../components/Button';
+import { employeeUpdate, employeeCreate } from '../action';
+import { Button } from '../commons';
 import EmployeeForm from './EmployeeForm';
 class EmployeeCreate extends React.Component {
     buttonPress() {

@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
-import { employeeFetch } from './action';
+import { employeeFetch } from '../action';
 import ListItem from './ListItem';
 class EmployeeList extends Component {
     componentWillMount() {

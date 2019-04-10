@@ -8,10 +8,8 @@ import {
     passwordChanged,
     createUser,
     loginUserFail,
-} from './action';
-import Button from '../components/Button';
-import Spinner from '../auth/Spinner';
-import { Input } from '../auth/Input';
+} from '../action';
+import { Button, Spinner } from '../commons';
 class RegisterForm extends Component {
     onEmailChange(text) {
         this.props.emailChanged(text);
@@ -41,7 +39,9 @@ class RegisterForm extends Component {
         if (this.props.loading) {
             return <Spinner />;
         }
-        return <Button onPress={this.onButtonPress.bind(this)}>SIGN IN</Button>;
+        return (
+            <Button onPress={this.onButtonPress.bind(this)}>{'SIGN IN'}</Button>
+        );
     }
 
     render() {

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Scene, Router, Actions } from 'react-native-router-flux';
-import LoginForm from './LoginForm';
-import EmployeeList from './EmployeeList';
-import EmployeeCreate from './EmployeeCreate';
-import EmployeeForm from './EmployeeForm';
-import EmployeeEdit from './EmployeeEdit';
-import RegisterForm from './RegisterForm';
+import LoginForm from './components/LoginForm';
+import EmployeeList from './components/EmployeeList';
+import EmployeeCreate from './components/EmployeeCreate';
+import EmployeeForm from './components/EmployeeForm';
+import EmployeeEdit from './components/EmployeeEdit';
+import RegisterForm from './components/RegisterForm';
 const RouterComponent = () => {
     return (
         <Router>

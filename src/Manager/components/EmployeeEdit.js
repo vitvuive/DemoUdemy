@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { connect } from 'react-redux';
-import { employeeUpdate, employeeSave, employeeDelete } from './action';
-import _ from 'lodash';
 import Communications from 'react-native-communications';
-import Button from '../components/Button';
-import Card from '../components/Card';
-import CardSection from '../components/CardSection';
+import _ from 'lodash';
+import { connect } from 'react-redux';
+import { employeeUpdate, employeeSave, employeeDelete } from '../action';
+import { Button } from '../commons';
 import EmployeeForm from './EmployeeForm';
 import Confirm from './Confirm';
 class EmployeeEdit extends Component {
@@ -65,7 +63,7 @@ class EmployeeEdit extends Component {
                         onAccept={this.onAccept.bind(this)}
                         onDecline={this.onDecline.bind(this)}
                     >
-                        Are you sure you want to delete this ?
+                        {'Are you sure you want to delete this ?'}
                     </Confirm>
                 </View>
             </LinearGradient>
@@ -76,7 +74,6 @@ class EmployeeEdit extends Component {
 const styles = {
     container: {
         flex: 1,
-        // backgroundColor:'#FFF',
         justifyContent: 'center',
     },
     containerForm: {

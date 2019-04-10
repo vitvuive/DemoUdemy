@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
-import CardSection from '../components/CardSection';
 import { Actions } from 'react-native-router-flux';
+import { CardSection } from '../commons';
 class ListItem extends Component {
     onRowPress() {
         Actions.employeeEdit({ employee: this.props.employee });
