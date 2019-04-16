@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { View } from 'react-native';
+import React from 'react';
 import { Scene, Router, Actions } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
 import EmployeeList from './components/EmployeeList';
@@ -56,6 +55,7 @@ const RouterComponent = () => {
                         component={EmployeeForm}
                         title="New Employee"
                     />
+
                     <Scene
                         key="employeeEdit"
                         component={EmployeeEdit}

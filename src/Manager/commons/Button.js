@@ -28,7 +28,7 @@ const styles = {
     textStyle: {
         fontSize: 18,
         fontWeight: '600',
-        color: '#FFF',
+        color: '#ffffff',
     },
 };
 

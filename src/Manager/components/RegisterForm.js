@@ -7,7 +7,8 @@ import {
     emailChanged,
     passwordChanged,
     createUser,
-    loginUserFail,
+    createUserFail,
+    setValue,
 } from '../action';
 import { Button, Spinner } from '../commons';
 class RegisterForm extends Component {
@@ -17,12 +18,12 @@ class RegisterForm extends Component {
     onPasswordChange(text) {
         this.props.passwordChanged(text);
     }
-    onButtonPress() {
+    _onButtonPress() {
         const { email, password } = this.props;
 
         this.props.createUser({ email, password });
     }
-    onError() {
+    _onError() {
         if (this.props.error) {
             return (
                 <View
@@ -35,19 +36,34 @@ class RegisterForm extends Component {
             );
         }
     }
-    renderSpinner() {
+
+    _textSuccess() {
+        if (this.props.succ) {
+            return (
+                <View
+                    style={{ backgroundColor: 'white', alignItems: 'center' }}
+                >
+                    <Text style={{ color: 'green', alignSelf: 'center' }}>
+                        {this.props.succ}
+                    </Text>
+                </View>
+            );
+        }
+    }
+    _renderButton() {
         if (this.props.loading) {
             return <Spinner />;
         }
         return (
-            <Button onPress={this.onButtonPress.bind(this)}>{'SIGN IN'}</Button>
+            <Button onPress={this._onButtonPress.bind(this)}>
+                {'SIGN IN'}
+            </Button>
         );
     }
 
     render() {
         const {
             contentForm,
-            containerStyle,
             containerForm,
             textContentForm,
             containerRegister,
@@ -98,10 +114,11 @@ class RegisterForm extends Component {
                             this.secondTextInput = input;
                         }}
                         returnKeyType="go"
-                        onSubmitEditing={this.onButtonPress.bind(this)}
+                        onSubmitEditing={this._onButtonPress.bind(this)}
                     />
-                    <View>{this.onError()}</View>
-                    {this.renderSpinner()}
+                    <View>{this._onError()}</View>
+                    <View>{this._textSuccess()}</View>
+                    {this._renderButton()}
                 </View>
                 <View style={containerRegister}>
                     <Text style={{ fontSize: 18, fontWeight: '400' }}>
@@ -185,6 +202,7 @@ const mapStateToProps = state => {
         password: state.auth.password,
         error: state.auth.error,
         loading: state.auth.loading,
+        succ: state.auth.succ,
     };
 };
 
@@ -194,6 +212,7 @@ export default connect(
         emailChanged,
         passwordChanged,
         createUser,
-        loginUserFail,
+        createUserFail,
+        setValue,
     }
 )(RegisterForm);

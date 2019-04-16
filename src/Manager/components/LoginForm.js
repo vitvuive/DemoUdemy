@@ -9,7 +9,7 @@ import {
     loginUser,
     loginUserFail,
 } from '../action';
-import { Styled, StyledButton, StyledText, Button, Spinner } from '../commons';
+import { Button, Spinner } from '../commons';
 
 class LoginForm extends Component {
     _onEmailChange(text) {

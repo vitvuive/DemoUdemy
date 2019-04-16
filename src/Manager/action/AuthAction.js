@@ -5,9 +5,12 @@ import {
     EMAIL_CHANGED,
     PASSWORD_CHANGED,
     LOGIN_USER_SUCCESS,
+    CREATE_USER_SUCCESS,
     LOGIN_USER_FAIL,
     LOGIN_USER,
     CREATE_USER,
+    CREATE_USER_FAIL,
+    SET_VALUE
 } from './type';
 
 export const emailChanged = text => {
@@ -32,13 +35,7 @@ export const loginUser = ({ email, password }) => {
             .signInWithEmailAndPassword(email, password)
             .then(user => loginUserSuccess(dispatch, user))
             .catch(() => {
-                firebase
-                    .auth()
-                    .createUserWithEmailAndPassword(email, password)
-                    .then(user => loginUserSuccess(dispatch, user))
-                    .catch(() => {
-                        loginUserFail(dispatch);
-                    });
+                loginUserFail(dispatch);
             });
     };
 };
@@ -49,9 +46,9 @@ export const createUser = ({ email, password }) => {
         firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
-            .then(user => loginUserSuccess(dispatch, user))
+            .then(createUserSuccess(dispatch))
             .catch(() => {
-                loginUserFail(dispatch);
+                createUserFail(dispatch);
             });
     };
 };
@@ -61,11 +58,26 @@ const loginUserFail = dispatch => {
         type: LOGIN_USER_FAIL,
     });
 };
-
+const createUserFail = dispatch => {
+    dispatch({
+        type: CREATE_USER_FAIL,
+    });
+};
 const loginUserSuccess = (dispatch, user) => {
     dispatch({
         type: LOGIN_USER_SUCCESS,
         payload: user,
     });
     Actions.main();
+};
+
+const createUserSuccess = dispatch => {
+    dispatch({
+        type: CREATE_USER_SUCCESS,
+    });
+const setValue = dispatch =>{
+    dispatch({
+        type: SET_VALUE
+    })
+}
 };
